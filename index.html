@@ -2,23 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Manejo de formularios con Vue.js</title>
+    <title>Listar elementos con Vue.js</title>
   </head>
   <body>
     <div id="app">
-      <input type="text" name="nombre" v-model="nombre" placeholder="Ingresa tu nombre">
-      <p>Tú nombre en Mayúsculas es: {{ nombre | uppercase }}</p>
 
       <form v-on:submit.prevent="submit" action="" method="post">
         <h2>¿Cuáles son tus cursos favoritos?</h2>
-        <input v-model="cursos" type="checkbox" id="vue" value="vue">
-        <label for="vue">Curso de Vue.js</label>
-        <input v-model="cursos" type="checkbox" id="seo" value="seo">
-        <label for="seo">Curso de SEO</label>
-        <input v-model="cursos" type="checkbox" id="react" value="react">
-        <label for="react">Curso de React y Redux</label>
-        <input v-model="cursos" type="checkbox" id="growth" value="growth">
-        <label for="growth">Curso de Growth Marketing</label>
+        <template v-for="curso in cursos">
+          <input v-model="cursosSelecionados" type="checkbox" :id="curso.value" :value="curso.value">
+          <label :for="curso.value">{{ curso.nombre }}</label>
+        </template>
 
         <button type="submit">Enviar</button>
       </form>
@@ -30,17 +24,18 @@
         el: '#app',
         data: {
           nombre: '',
-          cursos: []
+          cursos: [
+            { nombre: 'Curso de Vue.js', value: 'vue'},
+            { nombre: 'Curso de SEO', value: 'seo'},
+            { nombre: 'Curso de Recat y Redux', value: 'react'},
+            { nombre: 'Curso de Growth Marketing', value: 'growth'}
+          ],
+          cursosSelecionados: []
         },
         methods: {
           submit: function () {
             console.log('submit')
-            console.log(this.cursos)
-          }
-        },
-        filters: {
-          uppercase: function (srt) {
-            return srt.toUpperCase()
+            console.log(this.cursosSelecionados)
           }
         }
       })
