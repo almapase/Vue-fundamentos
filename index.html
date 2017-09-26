@@ -6,33 +6,31 @@
   </head>
   <body>
     <div id="app">
-      <!-- v-if elimina o rederea los elementos en el DOM -->
-      <template v-if="mostrar">
-        <h1>Este es mi título</h1>
-        <h2>Este es mi subtítulo</h2>
-        <a :href="url" target="_blank">{{ pagina }}</a>
-      </template>
 
-      <!-- v-show usa CSS (display:none) para ocultar en caso de false -->
-      <div v-show="mostrar">
-        <h1>Este es mi título</h1>
-        <h2>Este es mi subtítulo</h2>
-        <a :href="url" target="_blank">{{ pagina }}</a>
-      </div>
-      <div v-show="!mostrar">
-        <h1>Negado el data: mostrar</h1>
-        <h2>Este es mi subtítulo</h2>
-        <a :href="url" target="_blank">{{ pagina }}</a>
-      </div>
+      <h1>{{ titulo | uppercase }}</h1>
+      <h2>{{ subtitulo | capitalize }}</h2>
+      <h3>{{ subsubtitulo | lowercase }}</h2>
+      <!-- Más filtros: https://github.com/freearhey/vue2-filters -->
     </div>
     <script src="https://unpkg.com/vue"></script>
     <script type="text/javascript">
       let app = new Vue({
         el: '#app',
         data: {
-          pagina: 'Ir a Google',
-          url: 'https://google.com',
-          mostrar: true
+          titulo: 'Este es mi título',
+          subtitulo: 'Este es mi subtítulo',
+          subsubtitulo: 'Este es mi sub-subtítulo'
+        },
+        filters: {
+          uppercase: function (str) {
+            return str.toUpperCase()
+          },
+          lowercase: function (str) {
+            return str.toLowerCase()
+          },
+          capitalize: function (str) {
+            return str.charAt(0).toUpperCase() + str.slice(1)
+          }
         }
       })
     </script>
