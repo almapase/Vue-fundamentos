@@ -2,34 +2,33 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hola mundo con Vue.js</title>
+    <title>Control de Eventos con Vue.js</title>
   </head>
   <body>
     <div id="app">
+      <button v-on:click="sumar">Sumar 1</button>
+      <button @click="restar">Restar 1</button>
+      <p>El Contador está en {{ contador }}</p>
 
-      <h1>{{ titulo | uppercase }}</h1>
-      <h2>{{ subtitulo | capitalize }}</h2>
-      <h3>{{ subsubtitulo | lowercase }}</h2>
-      <!-- Más filtros: https://github.com/freearhey/vue2-filters -->
+      <button v-on:click="contador2++">Sumar 1</button>
+      <button @click="contador2--">Restar 1</button>
+      <p>El Contador 2 está en {{ contador2 }}</p>
+      <!-- Más eventos: https://es-vuejs.github.io/vuejs.org/v2/guide/events.html -->
     </div>
     <script src="https://unpkg.com/vue"></script>
     <script type="text/javascript">
       let app = new Vue({
         el: '#app',
         data: {
-          titulo: 'Este es mi título',
-          subtitulo: 'Este es mi subtítulo',
-          subsubtitulo: 'Este es mi sub-subtítulo'
+          contador: 0,
+          contador2: 0
         },
-        filters: {
-          uppercase: function (str) {
-            return str.toUpperCase()
+        methods:{
+          sumar: function () {
+            this.contador++
           },
-          lowercase: function (str) {
-            return str.toLowerCase()
-          },
-          capitalize: function (str) {
-            return str.charAt(0).toUpperCase() + str.slice(1)
+          restar: function () {
+            this.contador--
           }
         }
       })
